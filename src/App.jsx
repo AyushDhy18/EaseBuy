@@ -7,6 +7,7 @@ import NavBar from "./NavBar";
 import NotFound from "./NotFound";
 import { useState } from "react";
 import { stringify } from "postcss";
+import CartPage from "./CartPage";
 
 function App() {
   const savedDataString = localStorage.getItem("cart-item");
@@ -40,9 +41,9 @@ function App() {
               element={<ProductDetail onAddToCart={handelAddToCart} />}
             />
             <Route path="*" element={<NotFound />} />
+            <Route path="/Products/cart" element={<CartPage />} />
           </Routes>
         </div>
-
         <Footer />
       </div>
     </>

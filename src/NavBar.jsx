@@ -1,5 +1,7 @@
 import React from "react";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { MdOutlineShoppingBag } from "react-icons/md";
+import { Link } from "react-router-dom";
+
 function NavBar({ cartItems }) {
   return (
     <div className="py-3 px-7 flex justify-between">
@@ -8,8 +10,10 @@ function NavBar({ cartItems }) {
         src="https://images.unsplash.com/photo-1605053755182-5748283aa375?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
       />
       <div className="flex flex-col items-center">
-        <MdOutlineShoppingCart className="text-5xl text-blue-800" />
-        <span className="text-red-600 font-extrabold -my-14">{cartItems}</span>
+        <Link to="/products/cart">
+          <MdOutlineShoppingBag className="text-5xl text-blue-800" />
+        </Link>
+        <span className="text-red-600 font-extrabold -my-8">{cartItems}</span>
       </div>
     </div>
   );
