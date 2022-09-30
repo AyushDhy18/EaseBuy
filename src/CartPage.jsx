@@ -45,11 +45,20 @@ function CartPage() {
               </button>
             </div>
           </div>
-          <div className="bg-blue-200 mt-2 w-1/2">
-            <h1 className="font-bold">Cart totals</h1>
-            <h2>Subtotals</h2>
-            <h2>Totals</h2>
-            <button className="text-center rounded-lg border-2 bg-red-500 text-white">
+          <div className="bg-blue-200 mt-8 w-1/2 flex flex-col">
+            <h1 className="font-bold p-2">Cart totals</h1>
+
+            <div className="flex border-2 p-2 items-start">
+              <h2 className="w-1/2">Subtotals</h2>
+              <h2>$ 90</h2>
+            </div>
+
+            <div className="flex border-2 p-2 items-start">
+              <h2 className="w-1/2">Totals</h2>
+              <h2>$ 90</h2>
+            </div>
+
+            <button className="text-center py-3 border-2 bg-red-500 text-white self-stretch">
               PROCEED TO CHECKOUT
             </button>
           </div>
