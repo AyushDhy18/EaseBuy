@@ -26,6 +26,10 @@ function ProductDetail({ onAddToCart }) {
     [id]
   );
 
+  function handleNext_PreviousChange() {
+    setLoading(true);
+  }
+
   function handleCountChange(event) {
     setCount(+event.target.value);
   }
@@ -87,13 +91,21 @@ function ProductDetail({ onAddToCart }) {
           <div>
             {id > 1 && (
               <Link to={"/product/" + (id - 1)}>
-                <FcPrevious className="text-4xl" /> Previous
+                <FcPrevious
+                  className="text-4xl"
+                  onClick={handleNext_PreviousChange}
+                />{" "}
+                Previous
               </Link>
             )}
           </div>
           <div>
             <Link to={"/product/" + (id + 1)}>
-              <FcNext className="text-4xl" /> Next
+              <FcNext
+                className="text-4xl"
+                onClick={handleNext_PreviousChange}
+              />{" "}
+              Next
             </Link>
           </div>
         </div>

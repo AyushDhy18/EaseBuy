@@ -32,7 +32,7 @@ function CartPage() {
               <div>
                 <input
                   type="text"
-                  placeholder=" coupon code "
+                  placeholder=" Coupon code "
                   className="w-36 border-2 border-slate-400 rounded-md h-7"
                 />
                 <button className="rounded-lg border-2 bg-red-500 px-2 text-white w-36 h-8 text-sm">
