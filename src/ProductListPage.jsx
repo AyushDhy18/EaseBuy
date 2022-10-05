@@ -5,6 +5,7 @@ import Nomatching from "./Nomatching";
 import { getProductList } from "./api";
 import { FcSearch } from "react-icons/fc";
 import Loading from "./Loading";
+import { useCallback } from "react";
 
 function ProductListPage() {
   const [productList, setProductList] = useState([]);
@@ -12,6 +13,17 @@ function ProductListPage() {
 
   const [query, SetQuery] = useState("");
   const [sort, setSort] = useState("default");
+
+  const HandleChange = useCallback(function (event) {
+    let newQuery = event.target.value;
+
+    SetQuery(newQuery);
+  }, []);
+
+  const handleSortChange = useCallback(function (event) {
+    let Sort = event.target.value;
+    setSort(Sort);
+  }, []);
 
   useEffect(function () {
     const Promise = getProductList();
@@ -25,15 +37,6 @@ function ProductListPage() {
     return item.title.toLowerCase().indexOf(query.toLowerCase()) != -1;
   });
 
-  function HandleChange(event) {
-    let newQuery = event.target.value;
-
-    SetQuery(newQuery);
-  }
-  function handleSortChange(event) {
-    let Sort = event.target.value;
-    setSort(Sort);
-  }
   if (sort == "lowToHigh") {
     data.sort(function (x, y) {
       return x.price - y.price;
