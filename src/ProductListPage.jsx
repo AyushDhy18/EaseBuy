@@ -7,46 +7,46 @@ import { FcSearch } from "react-icons/fc";
 import Loading from "./Loading";
 import { useCallback } from "react";
 
-function ProductListPage() {
+const ProductListPage = () => {
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [query, SetQuery] = useState("");
   const [sort, setSort] = useState("default");
 
-  const HandleChange = useCallback(function (event) {
+  const HandleChange = useCallback((event) => {
     let newQuery = event.target.value;
 
     SetQuery(newQuery);
   }, []);
 
-  const handleSortChange = useCallback(function (event) {
+  const handleSortChange = useCallback((event) => {
     let Sort = event.target.value;
     setSort(Sort);
   }, []);
 
-  useEffect(function () {
+  useEffect(() => {
     const Promise = getProductList();
-    Promise.then(function (productlist) {
+    Promise.then((productlist) => {
       setProductList(productlist);
       setLoading(false);
     });
   }, []);
 
-  let data = productList.filter(function (item) {
+  let data = productList.filter((item) => {
     return item.title.toLowerCase().indexOf(query.toLowerCase()) != -1;
   });
 
   if (sort == "lowToHigh") {
-    data.sort(function (x, y) {
+    data.sort((x, y) => {
       return x.price - y.price;
     });
   } else if (sort == "highToLow") {
-    data.sort(function (x, y) {
+    data.sort((x, y) => {
       return y.price - x.price;
     });
   } else if (sort == "name") {
-    data.sort(function (x, y) {
+    data.sort((x, y) => {
       return x.title < y.title ? -1 : 1;
     });
   }
@@ -93,6 +93,6 @@ function ProductListPage() {
       </div>
     </>
   );
-}
+};
 
 export default ProductListPage;

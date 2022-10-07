@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import NotFoundImage from "./not_found_image.jpg";
 
-function NotFound() {
+const NotFound = () => {
   return (
     <div className="flex items-center justify-center flex-col">
       <img className="w-1/2 h-1/2" src={NotFoundImage} />
@@ -18,5 +18,5 @@ function NotFound() {
       </Link>
     </div>
   );
-}
+};
 export default NotFound;

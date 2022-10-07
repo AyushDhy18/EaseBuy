@@ -7,36 +7,33 @@ import Loading from "./Loading";
 import { FcPrevious, FcNext, FcHome } from "react-icons/fc";
 import NotFound from "./NotFound";
 
-function ProductDetail({ onAddToCart }) {
+const ProductDetail = ({ onAddToCart }) => {
   const id = +useParams().id;
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(true);
   const [count, setCount] = useState(1);
 
-  useEffect(
-    function () {
-      const Promise = getProductData(id);
-      Promise.then(function (product) {
-        setProduct(product);
-        setLoading(false);
-      }).catch(function () {
-        setLoading(false);
-      });
-    },
-    [id]
-  );
+  useEffect(() => {
+    const Promise = getProductData(id);
+    Promise.then((product) => {
+      setProduct(product);
+      setLoading(false);
+    }).catch(() => {
+      setLoading(false);
+    });
+  }, [id]);
 
-  function handleNext_PreviousChange() {
+  const handleNext_PreviousChange = () => {
     setLoading(true);
-  }
+  };
 
-  function handleCountChange(event) {
+  const handleCountChange = (event) => {
     setCount(+event.target.value);
-  }
-  function handleAddToCartChange() {
+  };
+  const handleAddToCartChange = () => {
     onAddToCart(id, count);
     setCount(1);
-  }
+  };
 
   if (loading) {
     return <Loading />;
@@ -112,5 +109,5 @@ function ProductDetail({ onAddToCart }) {
       </div>
     </>
   );
-}
+};
 export default ProductDetail;

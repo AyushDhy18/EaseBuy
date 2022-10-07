@@ -4,7 +4,7 @@ import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-function CartPage() {
+const CartPage = () => {
   return (
     <>
       <div>
@@ -54,6 +54,6 @@ function CartPage() {
       </div>
     </>
   );
-}
+};
 
 export default CartPage;

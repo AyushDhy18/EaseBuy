@@ -1,5 +1,5 @@
 import React from "react";
-function Button(props) {
+const Button = (props) => {
   return (
     <>
       <button
@@ -8,5 +8,5 @@ function Button(props) {
       ></button>
     </>
   );
-}
+};
 export default Button;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Product({ thumbnail, category, title, price, id }) {
+const Product = ({ thumbnail, category, title, price, id }) => {
   return (
     <div className="mt-6 p-1 max-w-xs flex flex-col border shadow-lg">
       <div>
@@ -18,5 +18,5 @@ function Product({ thumbnail, category, title, price, id }) {
       </Link>
     </div>
   );
-}
+};
 export default Product;

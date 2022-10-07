@@ -1,6 +1,6 @@
 import React from "react";
 
-function CartRow() {
+const CartRow = () => {
   return (
     <>
       <div className="p-3 grid grid-flow-col items-center border-2 justify-between bg-blue-200 space-x-6">
@@ -16,6 +16,6 @@ function CartRow() {
       </div>
     </>
   );
-}
+};
 
 export default CartRow;

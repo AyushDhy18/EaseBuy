@@ -16,16 +16,16 @@ function App() {
   const [cart, setCart] = useState(savedData || {});
   const path = window.location.pathname;
 
-  function handelAddToCart(productId, count) {
+  const handelAddToCart = (productId, count) => {
     const oldCount = cart[productId] || 0;
     const newCart = { ...cart, [productId]: oldCount + count };
     setCart(newCart);
 
     const cartString = JSON.stringify(newCart);
     localStorage.setItem("cart-item", cartString);
-  }
+  };
 
-  const totalCount = Object.keys(cart).reduce(function (previous, current) {
+  const totalCount = Object.keys(cart).reduce((previous, current) => {
     return previous + cart[current];
   }, 0);
 

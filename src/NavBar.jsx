@@ -2,7 +2,7 @@ import React from "react";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-function NavBar({ cartItems }) {
+const NavBar = ({ cartItems }) => {
   return (
     <div className="py-3 px-7 flex justify-between">
       <img
@@ -17,5 +17,5 @@ function NavBar({ cartItems }) {
       </div>
     </div>
   );
-}
+};
 export default NavBar;

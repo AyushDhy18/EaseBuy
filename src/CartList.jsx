@@ -1,7 +1,7 @@
 import React from "react";
 import CartRow from "./CartRow";
 
-function CartList() {
+const CartList = () => {
   return (
     <>
       <div>
@@ -17,6 +17,6 @@ function CartList() {
       </div>
     </>
   );
-}
+};
 
 export default CartList;
