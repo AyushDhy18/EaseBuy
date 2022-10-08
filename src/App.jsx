@@ -8,6 +8,9 @@ import NotFound from "./NotFound";
 import { useState } from "react";
 import { stringify } from "postcss";
 import CartPage from "./CartPage";
+import LoginPage from "./LoginPage";
+import SignUpPage from "./SignUpPage";
+import ForgotPassword from "./ForgotPassword";
 
 function App() {
   const savedDataString = localStorage.getItem("cart-item");
@@ -42,6 +45,12 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
             <Route path="/Products/cart" element={<CartPage />} />
+            <Route path="/My-Account/Login" element={<LoginPage />} />
+            <Route path="/My-Account/SignUp" element={<SignUpPage />} />
+            <Route
+              path="/My-Account/Forgot-password"
+              element={<ForgotPassword />}
+            />
           </Routes>
         </div>
         <Footer />
