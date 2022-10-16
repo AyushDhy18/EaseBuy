@@ -24,8 +24,10 @@ const ForgotPassword = () => {
               className="px-3 py-2 w-full sm:text-sm"
             ></input>
           </div>
-          <div classname="flex justify-center items-center">
-            <Button classname="w-9/12 "> Request password Reset</Button>
+          <div className="flex justify-center items-center">
+            <button className="w-9/12 mt-3 rounded-lg border-2 bg-red-500 px-4 py-1 text-white">
+              Request password Reset
+            </button>
           </div>
           <div className="flex justify-center">
             <h1 className="text-blue-600">Back to . </h1>
