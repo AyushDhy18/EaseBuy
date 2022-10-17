@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import FormInput from "./FormInput";
+import { FormikInput } from "./Input";
 import { Formik, Form } from "formik";
 
 const LoginPage = () => {
@@ -37,7 +37,7 @@ const LoginPage = () => {
             <Form className="bg-blue-200 border-2 shadow-lg shadow-blue-300 p-3 w-2/3">
               <h1 className="text-2xl font-bold self-start mb-4">Login</h1>
 
-              <FormInput
+              <FormikInput
                 label="Email Address"
                 id="email-address"
                 type="email"
@@ -46,7 +46,7 @@ const LoginPage = () => {
                 className=""
               />
 
-              <FormInput
+              <FormikInput
                 label="password"
                 id="password"
                 type="password"

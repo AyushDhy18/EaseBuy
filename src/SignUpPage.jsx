@@ -3,7 +3,7 @@ import React from "react";
 import Button from "./Button";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import FormInput from "./FormInput";
+import { FormikInput } from "./Input";
 
 const SignUpPage = () => {
   const callLoginApi = () => {
@@ -43,7 +43,7 @@ const SignUpPage = () => {
             <Form className="bg-blue-200 border-2 shadow-lg shadow-blue-300 p-3 w-2/3">
               <h1 className="text-xl font-bold self-start mb-4">Sign Up</h1>
 
-              <FormInput
+              <FormikInput
                 label="Fullname"
                 id="Fullname"
                 type="text"
@@ -52,7 +52,7 @@ const SignUpPage = () => {
                 className=""
               />
 
-              <FormInput
+              <FormikInput
                 label="Email Address"
                 id="email-address"
                 type="email"
@@ -60,7 +60,7 @@ const SignUpPage = () => {
                 required
                 className=""
               />
-              <FormInput
+              <FormikInput
                 label="UserName"
                 id="UserName"
                 type="text"
@@ -69,7 +69,7 @@ const SignUpPage = () => {
                 className=""
               />
 
-              <FormInput
+              <FormikInput
                 label="password"
                 id="password"
                 type="password"
@@ -78,7 +78,7 @@ const SignUpPage = () => {
                 className=""
               />
 
-              <FormInput
+              <FormikInput
                 label="ConfirmPassword"
                 id="ConfirmPassword"
                 type="password"
