@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { withFormik } from "formik";
 import Input from "./Input";
 
-const callLoginApi = () => {
+const callLoginApi = (values) => {
   console.log(
     "Sending Data",
     "email:",
@@ -30,7 +30,6 @@ export const LoginPage = ({
   touched,
   handleChange,
 }) => {
-  console.log(values);
   return (
     <>
       <div>

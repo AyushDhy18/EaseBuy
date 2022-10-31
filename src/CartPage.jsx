@@ -2,9 +2,8 @@ import React from "react";
 import CartList from "./CartList";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
-import Button from "./Button";
 
-const CartPage = () => {
+const CartPage = ({ cart, updateCart }) => {
   return (
     <>
       <div>
@@ -17,7 +16,7 @@ const CartPage = () => {
         <div className=" md:mx-52 flex flex-col items-end ">
           <div className="bg-blue-200 border-2 shadow-lg shadow-blue-300">
             <div>
-              <CartList></CartList>
+              <CartList cart={cart} updateCart={updateCart}></CartList>
             </div>
 
             <div className="flex justify-between p-2">
@@ -27,10 +26,14 @@ const CartPage = () => {
                   placeholder=" Coupon code "
                   className="w-36 border-2 border-slate-400 rounded-md h-7"
                 />
-                <Button className="w-36 h-8 text-sm">APPLY COUPON</Button>
+                <button className="w-36 h-9  text-sm rounded-lg border-2 bg-red-500 px-3 py-2 text-white font-bold">
+                  APPLY COUPON
+                </button>
               </div>
 
-              <Button className="w-36 h-9 text-sm">UPDATE CART</Button>
+              <button className="w-36 h-9 text-sm rounded-lg border-2 bg-red-500 px-3 py-2 text-white font-bold">
+                UPDATE CART
+              </button>
             </div>
           </div>
           <div className="bg-blue-200 mt-8 w-1/2 flex flex-col">

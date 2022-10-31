@@ -1,7 +1,7 @@
 import React from "react";
 import CartRow from "./CartRow";
 
-const CartList = () => {
+const CartList = ({ cart, updateCart }) => {
   return (
     <>
       <div>
@@ -12,8 +12,7 @@ const CartList = () => {
           <h1 className="text-center font-bold">quantity</h1>
           <h1 className="text-center font-bold">SubTotal</h1>
         </div>
-        <CartRow></CartRow>
-        <CartRow></CartRow>
+        <CartRow cart={cart} updateCart={updateCart}></CartRow>
       </div>
     </>
   );

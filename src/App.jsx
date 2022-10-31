@@ -22,6 +22,10 @@ function App() {
   const handelAddToCart = (productId, count) => {
     const oldCount = cart[productId] || 0;
     const newCart = { ...cart, [productId]: oldCount + count };
+    updateCart(newCart);
+  };
+
+  const updateCart = (newCart) => {
     setCart(newCart);
 
     const cartString = JSON.stringify(newCart);
@@ -44,7 +48,10 @@ function App() {
               element={<ProductDetail onAddToCart={handelAddToCart} />}
             />
             <Route path="*" element={<NotFound />} />
-            <Route path="/Products/cart" element={<CartPage />} />
+            <Route
+              path="/Products/cart"
+              element={<CartPage cart={cart} updateCart={updateCart} />}
+            />
             <Route path="/My-Account/Login" element={<LoginPage />} />
             <Route path="/My-Account/SignUp" element={<SignUpPage />} />
             <Route

@@ -10,6 +10,7 @@ const Product = ({ thumbnail, category, title, price, id }) => {
       <h3 className="text-teal-700">{category}</h3>
       <h1 className="text-xl text-blue-900">{title}</h1>
       <h2 className="text-xl text-blue-900">Rs. {price}</h2>
+      <span className="flex grow"></span>
       <Link
         className="bg-blue-300 px-2 border-4 rounded-2xl border-blue-500 self-end"
         to={"/product/" + id}
