@@ -1,19 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CartRow from "./CartRow";
 
-const CartList = ({ cart, updateCart }) => {
+const CartList = ({ products, cart, updateCart }) => {
+  const [localCart, setLocalcart] = useState(cart);
+
+  useEffect(() => {
+    setLocalcart(cart);
+  }, [cart]);
+
+  const handleQuantityChange = (productId, newValue) => {
+    const newLocalCart = { ...localCart, [productId]: newValue };
+    setLocalcart(newLocalCart);
+  };
+
+  const handleUpdateCart = () => {
+    updateCart(localCart);
+  };
+
+  const handleRemove = (productId) => {
+    const newCart = { ...cart };
+    delete newCart[productId];
+    updateCart(newCart);
+  };
+
   return (
     <>
       <div>
-        <div className="p-6 flex items-center gap-20">
-          <span className="w-64"></span>
-          <h1 className="text-center font-bold">Product</h1>
-          <h1 className="text-center font-bold">Price</h1>
-          <h1 className="text-center font-bold">quantity</h1>
-          <h1 className="text-center font-bold">SubTotal</h1>
+        <div className="py-3 pl-3 pr-16 flex items-center justify-between space-x-6">
+          <span className="w-16"></span>
+          <h1 className="text-center font-bold grow">Product</h1>
+          <h1 className="text-left w-20 font-bold">Price</h1>
+          <h1 className="text-left font-bold w-20">quantity</h1>
+          <h1 className="text-left w-20 font-bold mr-10">SubTotal</h1>
         </div>
-        <CartRow cart={cart} updateCart={updateCart}></CartRow>
+        {products.map((p) => {
+          return (
+            <>
+              <CartRow
+                product={p}
+                quantity={localCart[p.id]}
+                onQuantityChange={handleQuantityChange}
+                onRemove={handleRemove}
+              ></CartRow>
+            </>
+          );
+        })}
       </div>
+      <button
+        className="w-36 h-9 text-sm rounded-lg border-2 bg-red-500 px-3 py-2 text-white font-bold"
+        onClick={handleUpdateCart}
+      >
+        UPDATE CART
+      </button>
     </>
   );
 };

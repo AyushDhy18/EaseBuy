@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getProductData } from "./api";
+import Loading from "./Loading";
 import CartList from "./CartList";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 const CartPage = ({ cart, updateCart }) => {
+  const [loading, setLoading] = useState(true);
+  const [products, setProduct] = useState([]);
+
+  useEffect(() => {
+    const productIds = Object.keys(cart);
+    setLoading(true);
+    const myProductPromises = productIds.map((id) => {
+      return getProductData(id);
+    });
+
+    Promise.all(myProductPromises).then((products) => {
+      setProduct(products);
+      setLoading(false);
+    });
+  }, [cart]);
+
+  // const updateMyCart = () => {
+  //   updateCart(localCart);
+  // };
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (products == 0) {
+    return <div>no products yet</div>;
+  }
+
   return (
     <>
       <div>
@@ -14,9 +44,13 @@ const CartPage = ({ cart, updateCart }) => {
         </div>
 
         <div className=" md:mx-52 flex flex-col items-end ">
-          <div className="bg-blue-200 border-2 shadow-lg shadow-blue-300">
+          <div className="bg-blue-200 w-full border-2 shadow-lg shadow-blue-300">
             <div>
-              <CartList cart={cart} updateCart={updateCart}></CartList>
+              <CartList
+                products={products}
+                cart={cart}
+                updateCart={updateCart}
+              ></CartList>
             </div>
 
             <div className="flex justify-between p-2">

@@ -1,5 +1,5 @@
 import React from "react";
-const Button = ({ className, Children }) => {
+const Button = ({ ...props }) => {
   return (
     <button
       className={
