@@ -1,4 +1,5 @@
 import React from "react";
+import { FcHome } from "react-icons/fc";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -6,10 +7,15 @@ const NavBar = ({ cartItems }) => {
   return (
     <div className="py-3 px-7 flex justify-between">
       <img
-        className="w-40 h-10 ml-4 border border-yellow-700 rounded-md"
-        src="https://images.unsplash.com/photo-1605053755182-5748283aa375?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTR8fGxvZ298ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+        className="w-36 h-11 ml-4 border border-yellow-700 rounded-md"
+        src="https://i.ibb.co/WGWLQ1k/Screenshot-69.png"
       />
+
       <div className="flex items-start">
+        <Link to={"/"}>
+          <FcHome className="text-4xl mx-2" />
+        </Link>
+
         <Link
           className="bg-blue-300 px-3 py-1 border-2 rounded-md border-white shadow-lg"
           to="/My-Account/Login"

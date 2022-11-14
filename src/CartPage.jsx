@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import CartList from "./CartList";
 import { FcHome } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import Nomatching from "./Nomatching";
 
 const CartPage = ({ cart, updateCart }) => {
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,11 @@ const CartPage = ({ cart, updateCart }) => {
   }
 
   if (products == 0) {
-    return <div>no products yet</div>;
+    return (
+      <div className="p-4 my-2 text-5xl h-screen text-center text-teal-600 md:mt-40">
+        No products yet...
+      </div>
+    );
   }
 
   return (

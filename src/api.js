@@ -13,3 +13,5 @@ export function getProductList() {
     return response.data.products;
   });
 }
+
+export function sentUserData() {}
