@@ -3,15 +3,25 @@ import React from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import Input from "./Input";
+import WithUser from "./WithUser";
+import axios from "axios";
 
-const callLoginApi = () => {
-  console.log(
-    "Sending Data",
-    "email:",
-    values.email,
-    "password:",
-    values.password
-  );
+const callSignUpApi = (values, bag) => {
+  axios
+    .post("https://myeasykart.codeyogi.io/signup", {
+      email: values.email,
+      password: values.password,
+      fullName: values.Fullname,
+    })
+    .then((response) => {
+      const { user, token } = response.data;
+      localStorage.setItem("token", token);
+      console.log(bag);
+      bag.props.setUser(user);
+    })
+    .catch(() => {
+      console.log("invalid signup credentials");
+    });
 };
 const schema = Yup.object().shape({
   email: Yup.string().required().email("Please enter a valid email"),
@@ -141,9 +151,9 @@ export const SignUpPage = ({
 const myHOC = withFormik({
   initialValues: initialValues,
   validationSchema: schema,
-  handleSubmit: callLoginApi,
+  handleSubmit: callSignUpApi,
 });
 
 const easySignUp = myHOC(SignUpPage);
 
-export default easySignUp;
+export default WithUser(easySignUp);

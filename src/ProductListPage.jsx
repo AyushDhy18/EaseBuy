@@ -6,6 +6,7 @@ import { getProductList } from "./api";
 import { FcSearch } from "react-icons/fc";
 import Loading from "./Loading";
 import { useCallback } from "react";
+import { Navigate } from "react-router-dom";
 
 const ProductListPage = () => {
   const [productList, setProductList] = useState([]);

@@ -42,12 +42,6 @@ const CartPage = ({ cart, updateCart }) => {
   return (
     <>
       <div>
-        <div className="flex flex-col items-start">
-          <Link to={"/"}>
-            <FcHome className="text-4xl" />
-          </Link>
-        </div>
-
         <div className=" md:mx-52 flex flex-col items-end ">
           <div className="bg-blue-200 w-full border-2 shadow-lg shadow-blue-300">
             <div>

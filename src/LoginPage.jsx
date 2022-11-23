@@ -1,21 +1,26 @@
 import React from "react";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { withFormik } from "formik";
 import Input from "./Input";
 import axios from "axios";
+import WithUser from "./WithUser";
+import WithAlert from "./WithAlert";
 
-const callLoginApi = (values) => {
+const callLoginApi = (values, bag) => {
   axios
-    .post("https://myeasykart.codeyoyi.io/login", {
+    .post("https://myeasykart.codeyogi.io/login", {
       email: values.email,
       password: values.password,
     })
     .then((response) => {
-      console.log(response.data);
+      const { user, token } = response.data;
+      localStorage.setItem("token", token);
+      console.log(bag);
+      bag.props.setUser(user);
     })
     .catch(() => {
-      console.log("invalid credentials");
+      bag.props.setAlert({ type: "error", message: "invalid credentials" });
     });
 };
 const schema = Yup.object().shape({
@@ -107,4 +112,4 @@ const myHOC = withFormik({
 
 const easyLogin = myHOC(LoginPage);
 
-export default easyLogin;
+export default WithAlert(WithUser(easyLogin));

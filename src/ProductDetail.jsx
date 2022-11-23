@@ -46,9 +46,6 @@ const ProductDetail = ({ onAddToCart }) => {
   return (
     <>
       <div className="p-6 bg-blue-200 md:mx-52 border-2 shadow-lg shadow-blue-300 my-5">
-        <Link to={"/"}>
-          <FcHome className="text-4xl" />
-        </Link>
         <div className="flex gap-x-9 my-9 mx-12 p-10 max-h-full grow">
           <div className="overflow-hidden max-h-96">
             <img src={product.thumbnail} />
