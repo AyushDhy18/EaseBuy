@@ -6,56 +6,60 @@ import { getProductList } from "./api";
 import { FcSearch } from "react-icons/fc";
 import Loading from "./Loading";
 import { useCallback } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useSearchParams } from "react-router-dom";
+import { range } from "lodash";
 
 const ProductListPage = () => {
-  const [productList, setProductList] = useState([]);
+  const [productList, setProductList] = useState();
   const [loading, setLoading] = useState(true);
+  // const [query, SetQuery] = useState("");
+  // const [sort, setSort] = useState("default");
 
-  const [query, SetQuery] = useState("");
-  const [sort, setSort] = useState("default");
+  let [searchParams, setSearchParams] = useSearchParams();
 
-  const HandleChange = useCallback((event) => {
-    let newQuery = event.target.value;
+  const params = Object.fromEntries([...searchParams]);
+  let { query, sort, page } = params;
 
-    SetQuery(newQuery);
-  }, []);
+  query = query || "";
+  sort = sort || "default";
+  page = +page || 1;
 
-  const handleSortChange = useCallback((event) => {
-    let Sort = event.target.value;
-    setSort(Sort);
-  }, []);
+  const HandleChange = (event) => {
+    setSearchParams(
+      { ...params, query: event.target.value, page: 1 },
+      { replace: false }
+    );
+  };
+
+  const handleSortChange = (event) => {
+    setSearchParams(
+      { ...params, sort: event.target.value },
+      { replace: false }
+    );
+  };
 
   useEffect(() => {
-    const Promise = getProductList();
-    Promise.then((productlist) => {
+    let sortBy;
+    let sortType;
+    if (sort == "name") {
+      sortBy = "title";
+    } else if (sort == "lowToHigh") {
+      sortBy = "price";
+    } else if (sort == "highToLow") {
+      sortBy = "price";
+      sortType = "desc";
+    }
+    getProductList(sortBy, query, page, sortType).then((productlist) => {
       setProductList(productlist);
       setLoading(false);
     });
-  }, []);
+  }, [sort, query, page]);
 
-  let data = productList.filter((item) => {
-    return item.title.toLowerCase().indexOf(query.toLowerCase()) != -1;
-  });
-
-  if (sort == "lowToHigh") {
-    data.sort((x, y) => {
-      return x.price - y.price;
-    });
-  } else if (sort == "highToLow") {
-    data.sort((x, y) => {
-      return y.price - x.price;
-    });
-  } else if (sort == "name") {
-    data.sort((x, y) => {
-      return x.title < y.title ? -1 : 1;
-    });
-  }
   if (loading) return <Loading />;
 
   return (
     <>
-      <div className="p-6 bg-blue-200 md:mx-52 border-2 shadow-lg shadow-blue-300 my-5">
+      <div className="p-6 my-5 bg-blue-200 md:mx-52 border-2 shadow-lg shadow-blue-300 ">
         <div className="flex md:flex-row flex-col">
           <div className="flex">
             <FcSearch className="text-2xl" />
@@ -81,15 +85,29 @@ const ProductListPage = () => {
         </div>
 
         <div>
-          {data.length > 0 && <ProductList saman={data} />}
-          {data.length == 0 && (
+          {productList.data.length > 0 && (
+            <ProductList saman={productList.data} />
+          )}
+          {productList.data.length == 0 && (
             <Nomatching>No Matching products😢.....</Nomatching>
           )}
-          {data.length == 2 && (
+          {productList.data.length == 2 && (
             <Nomatching>
               Try searching something else for more Products 👩‍💻.....
             </Nomatching>
           )}
+          {range(1, productList.meta.last_page + 1).map((item) => (
+            <Link
+              className={
+                "rounded-md border-2 px-4 py-1 text-white font-bold mt-7 mx-1 shadow-lg border-red-500 " +
+                (item == page ? " bg-blue-400 " : " bg-red-500")
+              }
+              key={item}
+              to={"?" + new URLSearchParams({ ...params, page: item })}
+            >
+              {item}
+            </Link>
+          ))}
         </div>
       </div>
     </>

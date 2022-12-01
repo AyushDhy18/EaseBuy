@@ -4,10 +4,13 @@ import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
 import WithUser from "./WithUser";
 
-const NavBar = ({ cartItems, user, setUser }) => {
+const NavBar = ({ cartItems, user, setUser, setCart }) => {
   const handleLogout = () => {
+    localStorage.removeItem("cart-item");
+
     localStorage.removeItem("token");
     setUser(undefined);
+    setCart(0);
   };
   return (
     <div className="py-3 px-7 flex justify-between">

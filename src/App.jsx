@@ -10,42 +10,19 @@ import CartPage from "./CartPage";
 import LoginPage from "./LoginPage";
 import SignUpPage from "./SignUpPage";
 import ForgotPassword from "./ForgotPassword";
-import { useEffect } from "react";
-import axios from "axios";
 import Loading from "./Loading";
 import LoggedinRoute from "./LoggedinRoute";
 import NotLoggedinRoute from "./NotLoggedinRoute";
 import { createContext } from "react";
 import Alerts from "./Alerts";
 
+import UserProvider from "./Providers/UserProvider";
+import AlertProvider from "./Providers/AlertProvider";
+
 export const userContext = createContext();
 export const alertContext = createContext();
 
 function App() {
-  const [user, setUser] = useState();
-  const [alert, setAlert] = useState();
-  const RemoveAlert = () => {
-    setAlert(undefined);
-  };
-
-  const [userLoading, setUserLoading] = useState(true);
-  console.log("useris", user);
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    if (token) {
-      axios
-        .get("https://myeasykart.codeyogi.io/me", {
-          headers: { Authorization: token },
-        })
-        .then((response) => {
-          setUser(response.data);
-          setUserLoading(false);
-        });
-    } else {
-      setUserLoading(false);
-    }
-  }, []);
-
   const savedDataString = localStorage.getItem("cart-item");
   const savedData = JSON.parse(savedDataString);
 
@@ -69,24 +46,20 @@ function App() {
     return previous + cart[current];
   }, 0);
 
-  if (userLoading) {
-    return <Loading />;
-  }
-
   return (
     <>
-      <userContext.Provider value={{ user, setUser }}>
-        <alertContext.Provider value={{ alert, setAlert, RemoveAlert }}>
+      <UserProvider>
+        <AlertProvider>
           <Alerts />
           <div className="p-2 bg-blue-100 h-screen overflow-scroll flex flex-col">
-            <NavBar cartItems={totalCount} />
+            <NavBar cartItems={totalCount} setCart={setCart} />
             <div className="grow">
               <Routes>
                 <Route
                   index
                   element={
                     <LoggedinRoute>
-                      <ProductListPage setUser={setUser} />
+                      <ProductListPage />
                     </LoggedinRoute>
                   }
                 />
@@ -135,8 +108,8 @@ function App() {
             </div>
             <Footer />
           </div>
-        </alertContext.Provider>
-      </userContext.Provider>
+        </AlertProvider>
+      </UserProvider>
     </>
   );
 }
