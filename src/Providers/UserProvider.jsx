@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Loading from "../Loading";
-import { userContext } from "../App";
+import { userContext } from "../Contexts";
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
@@ -31,7 +31,7 @@ const UserProvider = ({ children }) => {
     return <Loading />;
   }
   return (
-    <userContext.Provider value={{ user, setUser }}>
+    <userContext.Provider value={{ isLoggedIn: !!token, user, setUser }}>
       {children}
     </userContext.Provider>
   );

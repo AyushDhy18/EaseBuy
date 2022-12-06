@@ -3,7 +3,7 @@ import React from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import Input from "./Input";
-import WithUser from "./WithUser";
+import { withUser } from "./WithProvider";
 import axios from "axios";
 
 const callSignUpApi = (values, bag) => {
@@ -156,4 +156,4 @@ const myHOC = withFormik({
 
 const easySignUp = myHOC(SignUpPage);
 
-export default WithUser(easySignUp);
+export default withUser(easySignUp);

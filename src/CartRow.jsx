@@ -25,7 +25,7 @@ const CartRow = ({ product, quantity, onQuantityChange, onRemove }) => {
           className="w-16 h-16"
         ></img>
         <h1 className="text-center font-bold grow">{product.title}</h1>
-        <h2 className=" text-left font-bold w-20">{product.price}</h2>
+        <h2 className=" text-left font-bold w-20">Rs. {product.price}</h2>
         <div className="w-20">
           <input
             productid={product.id}
@@ -36,7 +36,7 @@ const CartRow = ({ product, quantity, onQuantityChange, onRemove }) => {
           ></input>
         </div>
         <h2 className=" font-bold w-20 text-left">
-          {product.price * quantity}
+          Rs. {product.price * quantity}
         </h2>
 
         <button onClick={handleCrossClick}>

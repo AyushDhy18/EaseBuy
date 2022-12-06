@@ -1,27 +1,41 @@
 import React, { useEffect, useState } from "react";
 import CartRow from "./CartRow";
+import { withCart } from "./WithProvider";
 
-const CartList = ({ products, cart, updateCart }) => {
-  const [localCart, setLocalcart] = useState(cart);
+const CartList = ({ cart, updateCart }) => {
+  const [quantityMap, setQuantityMap] = useState();
+
+  const cartToQuantityMap = () =>
+    cart.reduce(
+      (m, cartItem) => ({ ...m, [cartItem.product.id]: cartItem.quantity }),
+      {}
+    );
 
   useEffect(() => {
-    setLocalcart(cart);
+    setQuantityMap(cartToQuantityMap());
   }, [cart]);
 
   const handleQuantityChange = (productId, newValue) => {
-    const newLocalCart = { ...localCart, [productId]: newValue };
-    setLocalcart(newLocalCart);
+    const newQuantityMap = { ...quantityMap, [productId]: newValue };
+    setQuantityMap(newQuantityMap);
   };
 
   const handleUpdateCart = () => {
-    updateCart(localCart);
+    updateCart(quantityMap);
   };
 
   const handleRemove = (productId) => {
-    const newCart = { ...cart };
-    delete newCart[productId];
-    updateCart(newCart);
+    const newQuantityMap = cartToQuantityMap();
+    delete newQuantityMap[productId];
+    updateCart(newQuantityMap);
   };
+  // if (products == 0) {
+  //   return (
+  //     <div className="p-4 my-2 text-5xl h-screen text-center text-teal-600 md:mt-40">
+  //       No products yet...
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -33,12 +47,13 @@ const CartList = ({ products, cart, updateCart }) => {
           <h1 className="text-left font-bold w-20">quantity</h1>
           <h1 className="text-left w-20 font-bold mr-10">SubTotal</h1>
         </div>
-        {products.map((p) => {
+        {cart.map((cartItem) => {
           return (
             <>
               <CartRow
-                product={p}
-                quantity={localCart[p.id]}
+                key={cartItem.product.id}
+                product={cartItem.product}
+                quantity={quantityMap[cartItem.product.id] || cartItem.quantity}
                 onQuantityChange={handleQuantityChange}
                 onRemove={handleRemove}
               ></CartRow>
@@ -46,14 +61,16 @@ const CartList = ({ products, cart, updateCart }) => {
           );
         })}
       </div>
-      <button
-        className="w-36 h-9 text-sm rounded-lg border-2 bg-red-500 px-3 py-2 text-white font-bold"
-        onClick={handleUpdateCart}
-      >
-        UPDATE CART
-      </button>
+      <div className="flex justify-end">
+        <button
+          className="w-36 h-9 mt-2 text-sm rounded-lg border-2 bg-red-500 px-3 py-2 text-white font-bold"
+          onClick={handleUpdateCart}
+        >
+          UPDATE CART
+        </button>
+      </div>
     </>
   );
 };
 
-export default CartList;
+export default withCart(CartList);

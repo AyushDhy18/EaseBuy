@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { MdOutlineDangerous } from "react-icons/md";
 import { MdCheckCircleOutline } from "react-icons/md";
-import WithAlert from "./WithAlert";
+import { withAlert } from "./WithProvider";
 
 const AlertTheme = {
   error: { color: "bg-red-400", Icon: MdOutlineDangerous },
@@ -69,4 +69,4 @@ const Alerts = ({ alert, setAlert, RemoveAlert }) => {
     </>
   );
 };
-export default WithAlert(Alerts);
+export default withAlert(Alerts);

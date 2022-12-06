@@ -4,8 +4,8 @@ import { Link, Navigate } from "react-router-dom";
 import { withFormik } from "formik";
 import Input from "./Input";
 import axios from "axios";
-import WithUser from "./WithUser";
-import WithAlert from "./WithAlert";
+import { withUser } from "./WithProvider";
+import { withAlert } from "./WithProvider";
 
 const callLoginApi = (values, bag) => {
   axios
@@ -112,4 +112,4 @@ const myHOC = withFormik({
 
 const easyLogin = myHOC(LoginPage);
 
-export default WithAlert(WithUser(easyLogin));
+export default withAlert(withUser(easyLogin));

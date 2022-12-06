@@ -6,8 +6,9 @@ import { getProductData } from "./api";
 import Loading from "./Loading";
 import { FcPrevious, FcNext, FcHome } from "react-icons/fc";
 import NotFound from "./NotFound";
+import { withCart } from "./WithProvider";
 
-const ProductDetail = ({ onAddToCart }) => {
+const ProductDetail = ({ addToCart }) => {
   const id = +useParams().id;
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,7 @@ const ProductDetail = ({ onAddToCart }) => {
     setCount(+event.target.value);
   };
   const handleAddToCartChange = () => {
-    onAddToCart(id, count);
+    addToCart(id, count);
     setCount(1);
   };
 
@@ -107,4 +108,4 @@ const ProductDetail = ({ onAddToCart }) => {
     </>
   );
 };
-export default ProductDetail;
+export default withCart(ProductDetail);

@@ -18,97 +18,74 @@ import Alerts from "./Alerts";
 
 import UserProvider from "./Providers/UserProvider";
 import AlertProvider from "./Providers/AlertProvider";
-
-export const userContext = createContext();
-export const alertContext = createContext();
+import CartProvider from "./Providers/CartProvider";
 
 function App() {
-  const savedDataString = localStorage.getItem("cart-item");
-  const savedData = JSON.parse(savedDataString);
-
-  const [cart, setCart] = useState(savedData || {});
-  const path = window.location.pathname;
-
-  const handelAddToCart = (productId, count) => {
-    const oldCount = cart[productId] || 0;
-    const newCart = { ...cart, [productId]: oldCount + count };
-    updateCart(newCart);
-  };
-
-  const updateCart = (newCart) => {
-    setCart(newCart);
-
-    const cartString = JSON.stringify(newCart);
-    localStorage.setItem("cart-item", cartString);
-  };
-
-  const totalCount = Object.keys(cart).reduce((previous, current) => {
-    return previous + cart[current];
-  }, 0);
-
   return (
     <>
       <UserProvider>
-        <AlertProvider>
-          <Alerts />
-          <div className="p-2 bg-blue-100 h-screen overflow-scroll flex flex-col">
-            <NavBar cartItems={totalCount} setCart={setCart} />
-            <div className="grow">
-              <Routes>
-                <Route
-                  index
-                  element={
-                    <LoggedinRoute>
-                      <ProductListPage />
-                    </LoggedinRoute>
-                  }
-                />
-                <Route
-                  path="/product/:id"
-                  element={
-                    <LoggedinRoute>
-                      <ProductDetail onAddToCart={handelAddToCart} />
-                    </LoggedinRoute>
-                  }
-                />
-                <Route path="*" element={<NotFound />} />
-                <Route
-                  path="/Products/cart"
-                  element={
-                    <LoggedinRoute>
-                      <CartPage cart={cart} updateCart={updateCart} />
-                    </LoggedinRoute>
-                  }
-                />
-                <Route
-                  path="/My-Account/Login"
-                  element={
-                    <NotLoggedinRoute>
-                      <LoginPage />
-                    </NotLoggedinRoute>
-                  }
-                />
-                <Route
-                  path="/My-Account/SignUp"
-                  element={
-                    <NotLoggedinRoute>
-                      <SignUpPage />
-                    </NotLoggedinRoute>
-                  }
-                />
-                <Route
-                  path="/My-Account/Forgot-password"
-                  element={
-                    <NotLoggedinRoute>
-                      <ForgotPassword />
-                    </NotLoggedinRoute>
-                  }
-                />
-              </Routes>
+        <CartProvider>
+          <AlertProvider>
+            <Alerts />
+            <div className="p-2 bg-blue-100 h-screen overflow-scroll flex flex-col">
+              <NavBar />
+              <div className="grow">
+                <Routes>
+                  <Route
+                    index
+                    element={
+                      <LoggedinRoute>
+                        <ProductListPage />
+                      </LoggedinRoute>
+                    }
+                  />
+                  <Route
+                    path="/product/:id"
+                    element={
+                      <LoggedinRoute>
+                        <ProductDetail />
+                      </LoggedinRoute>
+                    }
+                  />
+                  <Route path="*" element={<NotFound />} />
+                  <Route
+                    path="/Products/cart"
+                    element={
+                      <LoggedinRoute>
+                        <CartPage />
+                      </LoggedinRoute>
+                    }
+                  />
+                  <Route
+                    path="/My-Account/Login"
+                    element={
+                      <NotLoggedinRoute>
+                        <LoginPage />
+                      </NotLoggedinRoute>
+                    }
+                  />
+                  <Route
+                    path="/My-Account/SignUp"
+                    element={
+                      <NotLoggedinRoute>
+                        <SignUpPage />
+                      </NotLoggedinRoute>
+                    }
+                  />
+                  <Route
+                    path="/My-Account/Forgot-password"
+                    element={
+                      <NotLoggedinRoute>
+                        <ForgotPassword />
+                      </NotLoggedinRoute>
+                    }
+                  />
+                </Routes>
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </AlertProvider>
+          </AlertProvider>
+        </CartProvider>
       </UserProvider>
     </>
   );

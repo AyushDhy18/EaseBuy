@@ -2,9 +2,9 @@ import React from "react";
 import { FcHome } from "react-icons/fc";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import { Link } from "react-router-dom";
-import WithUser from "./WithUser";
+import { withCart, withUser } from "./WithProvider";
 
-const NavBar = ({ cartItems, user, setUser, setCart }) => {
+const NavBar = ({ cartCount, user, setUser, setCart }) => {
   const handleLogout = () => {
     localStorage.removeItem("cart-item");
 
@@ -53,10 +53,10 @@ const NavBar = ({ cartItems, user, setUser, setCart }) => {
           <Link to="/products/cart">
             <MdOutlineShoppingBag className="text-5xl text-blue-800" />
           </Link>
-          <span className="text-red-600 font-extrabold -my-8">{cartItems}</span>
+          <span className="text-red-600 font-extrabold -my-8">{cartCount}</span>
         </div>
       </div>
     </div>
   );
 };
-export default WithUser(NavBar);
+export default withUser(withCart(NavBar));

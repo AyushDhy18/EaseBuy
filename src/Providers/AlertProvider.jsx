@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { alertContext } from "../App";
+import { alertContext } from "../Contexts";
 
 const AlertProvider = ({ children }) => {
   const [alert, setAlert] = useState();

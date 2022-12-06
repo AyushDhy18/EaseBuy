@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route } from "react-router-dom";
-import WithUser from "./WithUser";
+import { withUser } from "./WithProvider";
 
 const LoggedinRoute = ({ user, children }) => {
   if (!user) {
@@ -8,4 +8,4 @@ const LoggedinRoute = ({ user, children }) => {
   }
   return children;
 };
-export default WithUser(LoggedinRoute);
+export default withUser(LoggedinRoute);
