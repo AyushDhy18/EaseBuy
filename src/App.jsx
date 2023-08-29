@@ -34,50 +34,50 @@ function App() {
                   <Route
                     index
                     element={
-                      <LoggedinRoute>
+                 
                         <ProductListPage />
-                      </LoggedinRoute>
+                    
                     }
                   />
                   <Route
                     path="/product/:id"
                     element={
-                      <LoggedinRoute>
+                     
                         <ProductDetail />
-                      </LoggedinRoute>
+                   
                     }
                   />
                   <Route path="*" element={<NotFound />} />
                   <Route
                     path="/Products/cart"
                     element={
-                      <LoggedinRoute>
+                     
                         <CartPage />
-                      </LoggedinRoute>
+                     
                     }
                   />
                   <Route
                     path="/My-Account/Login"
                     element={
-                      <NotLoggedinRoute>
+                     
                         <LoginPage />
-                      </NotLoggedinRoute>
+                      
                     }
                   />
                   <Route
                     path="/My-Account/SignUp"
                     element={
-                      <NotLoggedinRoute>
+                      
                         <SignUpPage />
-                      </NotLoggedinRoute>
+                     
                     }
                   />
                   <Route
                     path="/My-Account/Forgot-password"
                     element={
-                      <NotLoggedinRoute>
+                      
                         <ForgotPassword />
-                      </NotLoggedinRoute>
+                      
                     }
                   />
                 </Routes>
